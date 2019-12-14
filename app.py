@@ -49,13 +49,31 @@ def turn_off():
 
 @app.route("/twinkle")
 def twinkle():
+    global global_pid
     print("twinkle")
+    # stop previous process
+    stop_process()
+    # if it's hacky but it works, is it really hacky?
+    process = subprocess.Popen(['python3', 'starcode/twinkle.py'])
+    # Record new PID so it can be stopped
+    global_pid = process.pid
+    print("Current PID: ")
+    print(global_pid)
     return render_template('index.html')
 
 
 @app.route("/breathe")
 def breathe():
+    global global_pid
     print("breathe")
+    # stop previous process
+    stop_process()
+    # if it's hacky but it works, is it really hacky?
+    process = subprocess.Popen(['python3', 'starcode/in_out.py'])
+    # Record new PID so it can be stopped
+    global_pid = process.pid
+    print("Current PID: ")
+    print(global_pid)
     return render_template('index.html')
 
 
