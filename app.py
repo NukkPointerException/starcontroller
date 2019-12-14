@@ -61,11 +61,25 @@ def twinkle():
     print(global_pid)
     return render_template('index.html')
 
-
-@app.route("/breathe")
-def breathe():
+@app.route("/pulse")
+def pulse():
     global global_pid
-    print("breathe")
+    print("pulse")
+    # stop previous process
+    stop_process()
+    # if it's hacky but it works, is it really hacky?
+    process = subprocess.Popen(['python3', 'starcode/pulse.py'])
+    # Record new PID so it can be stopped
+    global_pid = process.pid
+    print("Current PID: ")
+    print(global_pid)
+    return render_template('index.html')
+
+
+@app.route("/inout")
+def inout():
+    global global_pid
+    print("inout")
     # stop previous process
     stop_process()
     # if it's hacky but it works, is it really hacky?
