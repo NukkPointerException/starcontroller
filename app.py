@@ -2,10 +2,19 @@ from flask import Flask, render_template
 import subprocess
 import os
 import signal
+import logging
+
+# Flask server that allows invoker to remotely run python scripts that control the star
+
+# Lets get some logging going
+logger = logging.getLogger('StarController')
+hdlr = logging.FileHandler('starcontroller.log')
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+hdlr.setFormatter(formatter)
+logger.addHandler(hdlr)
+logger.setLevel(logging.INFO)
 
 app = Flask(__name__)
-
-# Server that allows invoker to remotely call code that controls the star
 
 # The PID of the currently running star controlling process
 global_pid = -1
@@ -19,75 +28,54 @@ def main():
 
 @app.route("/on")
 def turn_on():
+    logger.info("Star mode: ON")
     global global_pid
-    print("on")
     # stop previous process
     stop_process()
     # if it's hacky but it works, is it really hacky?
     process = subprocess.Popen(['python3', 'starcode/all_on.py'])
     # Record new PID so it can be stopped
     global_pid = process.pid
-    print("Current PID: ")
-    print(global_pid)
     return render_template('index.html')
 
 
 @app.route("/off")
 def turn_off():
+    logger.info("Star mode: OFF")
     global global_pid
-    print("off")
-    # stop previous process
     stop_process()
-    # if it's hacky but it works, is it really hacky?
     process = subprocess.Popen(['python3', 'starcode/all_off.py'])
-    # Record new PID so it can be stopped
     global_pid = process.pid
-    print("Current PID: ")
-    print(global_pid)
     return render_template('index.html')
 
 
 @app.route("/twinkle")
 def twinkle():
+    logger.info("Star mode: TWINKLE")
     global global_pid
-    print("twinkle")
-    # stop previous process
     stop_process()
-    # if it's hacky but it works, is it really hacky?
     process = subprocess.Popen(['python3', 'starcode/twinkle.py'])
-    # Record new PID so it can be stopped
     global_pid = process.pid
-    print("Current PID: ")
-    print(global_pid)
     return render_template('index.html')
+
 
 @app.route("/pulse")
 def pulse():
+    logger.info("Star mode: PULSE")
     global global_pid
-    print("pulse")
-    # stop previous process
     stop_process()
-    # if it's hacky but it works, is it really hacky?
     process = subprocess.Popen(['python3', 'starcode/pulse.py'])
-    # Record new PID so it can be stopped
     global_pid = process.pid
-    print("Current PID: ")
-    print(global_pid)
     return render_template('index.html')
 
 
 @app.route("/inout")
 def inout():
+    logger.info("Star mode: IN/OUT")
     global global_pid
-    print("inout")
-    # stop previous process
     stop_process()
-    # if it's hacky but it works, is it really hacky?
     process = subprocess.Popen(['python3', 'starcode/in_out.py'])
-    # Record new PID so it can be stopped
     global_pid = process.pid
-    print("Current PID: ")
-    print(global_pid)
     return render_template('index.html')
 
 

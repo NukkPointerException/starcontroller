@@ -1,0 +1,9 @@
+.body {
+    background-color: #24a704;
+}
+/* Should present the buttons reasonably sized so they're easily viewable on mobile device*/
+.button {
+    text-align: center;
+    height:100px;
+    width:75%
+}

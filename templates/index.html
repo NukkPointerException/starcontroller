@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Star Controller!</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body style="background-color: #24a704;">
-<form id="on" action="/on"><input style="text-align: center; height:100px; width:250px" type="submit" value="ON" /></form>
-<br/>
-<form id="off" action="/off"><input style="text-align: center; height:100px; width:250px" type="submit" value="OFF" /></form>
-<br/>
-<form id="twinkle" action="/twinkle"><input style="text-align: center; height:100px; width:250px" type="submit" value="TWINKLE" /></form>
-<br/>
-<form id="pulse" action="/pulse"><input style="text-align: center; height:100px; width:250px" type="submit" value="PULSE" /></form>
-<br/>
-<form id="inout" action="/inout"><input style="text-align: center; height:100px; width:250px" type="submit" value="IN-OUT" /></form>
+<body class="body">
+<!-- A very basic set of buttons to send requests to endpoints when clicked -->
+    <div>
+        <form id="on" action="/on" ><input class="button" type="submit" value="ON" /></form>
+        <br/>
+        <form id="off" action="/off"><input class="button" type="submit" value="OFF" /></form>
+        <br/>
+        <form id="twinkle" action="/twinkle"><input class="button" type="submit" value="TWINKLE" /></form>
+        <br/>
+        <form id="pulse" action="/pulse"><input class="button" type="submit" value="PULSE" /></form>
+        <br/>
+        <form id="inout" action="/inout"><input class="button" type="submit" value="IN-OUT" /></form>
+    </div>
 </body>
 </html>
